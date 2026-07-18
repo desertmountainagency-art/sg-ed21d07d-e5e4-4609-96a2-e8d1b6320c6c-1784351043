@@ -22,6 +22,9 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
   const handleUpgradeClick = () => {
     const stripePaymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK;
     
+    console.log('Stripe Payment Link:', stripePaymentLink);
+    console.log('All env vars:', import.meta.env);
+    
     if (!stripePaymentLink || stripePaymentLink === "https://buy.stripe.com/your-payment-link-here") {
       alert('⚠️ Stripe payment link not configured. Please add VITE_STRIPE_PAYMENT_LINK to your .env.local file.');
       return;

@@ -20,11 +20,16 @@ import SettingsPage from './components/SettingsPage';
 import UpgradeModal from './components/UpgradeModal';
 import Toast from './components/Toast';
 import LandingPage from './components/LandingPage';
+import PaymentSuccess from './components/PaymentSuccess';
 
 export default function App() {
   // Page Navigation State
   const [currentPage, setCurrentPage] = useState<string>('pageDashboard');
   const [showLanding, setShowLanding] = useState<boolean>(true);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [isProUser, setIsProUser] = useState(false);
+  const [showLandingPage, setShowLandingPage] = useState(true);
+  const [showSuccessPage, setShowSuccessPage] = useState(false);
 
   // Core Application Data State
   const [onboardingComplete, setOnboardingComplete] = useState<boolean>(false);
@@ -41,6 +46,26 @@ export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Load state from IndexedDB on startup
+  useEffect(() => {
+    // Check URL parameters for payment success
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true' || urlParams.get('payment') === 'success') {
+      setShowSuccessPage(true);
+      setIsProUser(true);
+      setShowLandingPage(false);
+      
+      // Store pro status
+      localStorage.setItem('isPro', 'true');
+      
+      // Clean up URL
+      window.history.replaceState({}, '', window.location.pathname);
+    } else {
+      // Check if user is already pro
+      const isPro = localStorage.getItem('isPro') === 'true';
+      setIsProUser(isPro);
+    }
+  }, []);
+
   useEffect(() => {
     async function init() {
       try {
@@ -332,20 +357,14 @@ export default function App() {
   };
 
   // Trigger simulated upgrade to Pro tier
-  const handleUpgradeToPro = async () => {
-    try {
-      setTier('pro');
-      const currentSettings = await loadAppSettings();
-      const updatedSettings = {
-        ...currentSettings,
-        tier: 'pro' as const,
-      };
-      await saveAppSettings(updatedSettings);
-      setIsUpgradeModalOpen(false);
-      showToast('Upgraded to Pro!');
-    } catch (err) {
-      console.error('Failed to save upgrade setting:', err);
-    }
+  const handleUpgrade = () => {
+    setIsProUser(true);
+    localStorage.setItem('isPro', 'true');
+    setShowUpgradeModal(false);
+    setToast({
+      message: "🎉 Upgraded to Pro! All features unlocked.",
+      type: "success"
+    });
   };
 
   if (isLoading) {
@@ -363,6 +382,28 @@ export default function App() {
 
   if (!onboardingComplete) {
     return <Onboarding onComplete={handleOnboardingComplete} />;
+  }
+
+  if (showSuccessPage) {
+    return (
+      <PaymentSuccess 
+        onContinue={() => {
+          setShowSuccessPage(false);
+          setShowOnboarding(true);
+        }}
+      />
+    );
+  }
+
+  if (showLandingPage) {
+    return (
+      <LandingPage 
+        onGetStarted={() => {
+          setShowLandingPage(false);
+          setShowOnboarding(true);
+        }}
+      />
+    );
   }
 
   return (
@@ -511,7 +552,7 @@ export default function App() {
       <UpgradeModal
         isOpen={isUpgradeModalOpen}
         onClose={() => setIsUpgradeModalOpen(false)}
-        onUpgrade={handleUpgradeToPro}
+        onUpgrade={handleUpgrade}
       />
 
       {/* State-driven Toasts */}
