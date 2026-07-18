@@ -25,7 +25,6 @@ import PaymentSuccess from './components/PaymentSuccess';
 export default function App() {
   // Page Navigation State
   const [currentPage, setCurrentPage] = useState<string>('pageDashboard');
-  const [showLanding, setShowLanding] = useState<boolean>(true);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [isProUser, setIsProUser] = useState(false);
   const [showSuccessPage, setShowSuccessPage] = useState(false);
@@ -46,28 +45,28 @@ export default function App() {
 
   // Load state from IndexedDB on startup
   useEffect(() => {
-    // Check URL parameters for payment success
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('success') === 'true' || urlParams.get('payment') === 'success') {
-      setShowSuccessPage(true);
-      setIsProUser(true);
-      setShowLanding(false);
-      
-      // Store pro status
-      localStorage.setItem('isPro', 'true');
-      
-      // Clean up URL
-      window.history.replaceState({}, '', window.location.pathname);
-    } else {
-      // Check if user is already pro
-      const isPro = localStorage.getItem('isPro') === 'true';
-      setIsProUser(isPro);
-    }
-  }, []);
-
-  useEffect(() => {
     async function init() {
       try {
+        // Check URL parameters for payment success FIRST
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true' || urlParams.get('payment') === 'success') {
+          setShowSuccessPage(true);
+          setIsProUser(true);
+          
+          // Store pro status
+          localStorage.setItem('isPro', 'true');
+          
+          // Clean up URL
+          window.history.replaceState({}, '', window.location.pathname);
+          setIsLoading(false);
+          return; // Exit early, don't load other data yet
+        }
+
+        // Check if user is already pro
+        const isPro = localStorage.getItem('isPro') === 'true';
+        setIsProUser(isPro);
+
+        // Load app settings
         const settings = await loadAppSettings();
         setOnboardingComplete(settings.onboardingComplete);
         setTier(settings.tier);
@@ -363,6 +362,7 @@ export default function App() {
     showToast("🎉 Upgraded to Pro! All features unlocked.");
   };
 
+  // RENDER LOGIC - Clear navigation flow
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-bg-primary text-text-secondary">
@@ -372,29 +372,29 @@ export default function App() {
     );
   }
 
-  // Payment success page (shows after Stripe checkout)
+  // Step 1: Payment Success Page (shows after Stripe checkout)
   if (showSuccessPage) {
     return (
       <PaymentSuccess 
         onContinue={() => {
           setShowSuccessPage(false);
-          setShowLanding(false); // Skip landing after payment
+          // After payment, go to onboarding if not completed, otherwise dashboard
+          if (!onboardingComplete) {
+            // Will fall through to onboarding check below
+          }
         }}
       />
     );
   }
 
-  // Landing page (first visit, before onboarding)
-  if (showLanding && !onboardingComplete) {
-    return <LandingPage onGetStarted={() => setShowLanding(false)} />;
-  }
-
-  // Onboarding (after clicking Get Started from landing)
+  // Step 2: Landing Page → Onboarding → Dashboard
+  // First-time users see: Landing → Onboarding
+  // Returning users skip directly to: Dashboard
   if (!onboardingComplete) {
     return <Onboarding onComplete={handleOnboardingComplete} />;
   }
 
-  // Main app (after onboarding complete)
+  // Step 3: Main App (after onboarding complete)
   return (
     <div className="flex flex-col h-screen max-w-[480px] mx-auto bg-bg-primary relative overflow-hidden md:border-x md:border-border-custom md:shadow-2xl">
       
