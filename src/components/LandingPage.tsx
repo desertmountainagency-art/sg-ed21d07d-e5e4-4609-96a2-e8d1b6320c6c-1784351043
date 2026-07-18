@@ -1,8 +1,51 @@
+import { useState } from "react";
+
 interface LandingPageProps {
   onGetStarted: () => void;
 }
 
 export default function LandingPage({ onGetStarted }: LandingPageProps) {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const faqs = [
+    {
+      question: "Is my financial data really secure?",
+      answer: "Absolutely. All your data is stored locally in your browser's IndexedDB. Nothing is sent to the cloud, no servers store your information, and no third parties have access to your transactions. Your privacy is guaranteed by design."
+    },
+    {
+      question: "What happens if I clear my browser data?",
+      answer: "If you clear your browser's local storage, your transaction data will be permanently deleted. We recommend exporting your data regularly (available in Settings) or using a dedicated browser profile for Ownit.Money to avoid accidental data loss."
+    },
+    {
+      question: "How does the receipt scanner work?",
+      answer: "Our AI-powered receipt scanner uses Tesseract OCR to extract text from photos. Simply snap a picture of your receipt, and the app will automatically detect the merchant name, total amount, date, and categorize the transaction. You can always edit the details if needed."
+    },
+    {
+      question: "Can I use this across multiple devices?",
+      answer: "Since data is stored locally on each device, there's no automatic sync between devices. However, you can export your data from one device and import it on another using the Settings page. This ensures your data never touches external servers."
+    },
+    {
+      question: "Is there a mobile app?",
+      answer: "Ownit.Money is a progressive web app (PWA) that works seamlessly on mobile browsers. You can add it to your home screen for a native app-like experience. No app store downloads or permissions required!"
+    },
+    {
+      question: "How much does it cost?",
+      answer: "Ownit.Money is completely free and open source. No subscriptions, no hidden fees, no ads. We believe financial privacy should be accessible to everyone. If you find it useful, consider starring our GitHub repo or contributing to the project."
+    },
+    {
+      question: "What categories can I track?",
+      answer: "We provide 12+ pre-configured categories including Food & Dining, Transportation, Shopping, Entertainment, Bills & Utilities, Health & Fitness, and more. You can also create custom categories tailored to your specific needs."
+    },
+    {
+      question: "Can I export my data?",
+      answer: "Yes! You can export all your transactions as a JSON file from the Settings page. This allows you to back up your data, migrate to another device, or analyze it with external tools. Your data, your control."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-bg-primary flex flex-col items-center justify-center px-6 py-12 relative overflow-hidden">
       
@@ -134,6 +177,60 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="pt-20">
+          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary mb-4 text-center">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-text-muted text-center mb-10 max-w-2xl mx-auto">
+            Everything you need to know about Ownit.Money
+          </p>
+
+          <div className="max-w-3xl mx-auto space-y-3">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-bg-surface border border-border-custom rounded-xl overflow-hidden backdrop-blur-md"
+              >
+                <button
+                  type="button"
+                  onClick={() => toggleFaq(index)}
+                  className="w-full text-left p-5 flex items-center justify-between gap-4 hover:bg-bg-surface/50 transition-colors"
+                >
+                  <span className="font-semibold text-text-primary text-sm sm:text-base">
+                    {faq.question}
+                  </span>
+                  <svg
+                    className={`w-5 h-5 text-text-muted transition-transform flex-shrink-0 ${
+                      openFaq === index ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    openFaq === index ? "max-h-96" : "max-h-0"
+                  }`}
+                >
+                  <div className="px-5 pb-5 text-sm text-text-secondary leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
