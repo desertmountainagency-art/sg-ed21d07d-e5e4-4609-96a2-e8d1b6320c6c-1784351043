@@ -52,6 +52,91 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           </div>
         </div>
 
+        {/* Testimonials section */}
+        <div className="pt-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary mb-8">
+            Trusted by Privacy-Conscious Users
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+            {/* Testimonial 1 */}
+            <div className="bg-bg-surface border border-border-custom rounded-xl p-5 sm:p-6 backdrop-blur-md text-left">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="text-2xl">⭐⭐⭐⭐⭐</div>
+              </div>
+              <p className="text-sm text-text-secondary italic mb-4">
+                "Finally, a budget app that respects my privacy. No cloud sync means my financial data stays mine. The receipt scanner is surprisingly accurate!"
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-lg">
+                  👤
+                </div>
+                <div>
+                  <p className="font-semibold text-text-primary text-sm">Sarah M.</p>
+                  <p className="text-xs text-text-muted">Privacy Advocate</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div className="bg-bg-surface border border-border-custom rounded-xl p-5 sm:p-6 backdrop-blur-md text-left">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="text-2xl">⭐⭐⭐⭐⭐</div>
+              </div>
+              <p className="text-sm text-text-secondary italic mb-4">
+                "I've tried dozens of finance apps. This is the only one I trust. Everything stays on my device, and the insights are actually useful."
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center text-lg">
+                  👤
+                </div>
+                <div>
+                  <p className="font-semibold text-text-primary text-sm">James K.</p>
+                  <p className="text-xs text-text-muted">Software Engineer</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className="bg-bg-surface border border-border-custom rounded-xl p-5 sm:p-6 backdrop-blur-md text-left">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="text-2xl">⭐⭐⭐⭐⭐</div>
+              </div>
+              <p className="text-sm text-text-secondary italic mb-4">
+                "Simple, clean, and private. No subscriptions, no tracking, no BS. Just what I need to track my expenses without selling my data."
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-lg">
+                  👤
+                </div>
+                <div>
+                  <p className="font-semibold text-text-primary text-sm">Maya L.</p>
+                  <p className="text-xs text-text-muted">Freelance Designer</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 4 */}
+            <div className="bg-bg-surface border border-border-custom rounded-xl p-5 sm:p-6 backdrop-blur-md text-left">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="text-2xl">⭐⭐⭐⭐⭐</div>
+              </div>
+              <p className="text-sm text-text-secondary italic mb-4">
+                "The charts help me see exactly where my money goes. No more wondering why I'm always broke at month-end. Love the local-first approach!"
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center text-lg">
+                  👤
+                </div>
+                <div>
+                  <p className="font-semibold text-text-primary text-sm">Alex R.</p>
+                  <p className="text-xs text-text-muted">Small Business Owner</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Call to action */}
         <div className="pt-8 space-y-4">
           <button
