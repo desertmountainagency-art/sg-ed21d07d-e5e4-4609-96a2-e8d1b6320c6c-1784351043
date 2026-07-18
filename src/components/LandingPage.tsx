@@ -20,32 +20,32 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           <div className="text-5xl">💰</div>
         </div>
         
-        <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-text-primary leading-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-text-primary leading-tight">
           Own Your Money.<br/>
           <span className="text-accent">Own Your Privacy.</span>
         </h1>
 
         {/* Value proposition */}
-        <p className="text-lg md:text-xl text-text-secondary max-w-xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-text-secondary max-w-xl mx-auto leading-relaxed">
           Track expenses, scan receipts, and manage your finances with complete privacy. 
           All your data stays <span className="text-success font-semibold">100% local</span> on your device.
         </p>
 
         {/* Feature highlights */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6">
-          <div className="bg-bg-surface border border-border-custom rounded-2xl p-6 backdrop-blur-md">
+          <div className="bg-bg-surface border border-border-custom rounded-2xl p-4 sm:p-6 backdrop-blur-md">
             <div className="text-3xl mb-3">🔒</div>
             <h3 className="font-semibold text-text-primary mb-2">Privacy First</h3>
             <p className="text-sm text-text-muted">No cloud sync. No tracking. Your data never leaves your device.</p>
           </div>
           
-          <div className="bg-bg-surface border border-border-custom rounded-2xl p-6 backdrop-blur-md">
+          <div className="bg-bg-surface border border-border-custom rounded-2xl p-4 sm:p-6 backdrop-blur-md">
             <div className="text-3xl mb-3">📸</div>
             <h3 className="font-semibold text-text-primary mb-2">Smart Receipts</h3>
             <p className="text-sm text-text-muted">Snap photos of receipts and auto-extract transaction details.</p>
           </div>
           
-          <div className="bg-bg-surface border border-border-custom rounded-2xl p-6 backdrop-blur-md">
+          <div className="bg-bg-surface border border-border-custom rounded-2xl p-4 sm:p-6 backdrop-blur-md">
             <div className="text-3xl mb-3">📊</div>
             <h3 className="font-semibold text-text-primary mb-2">Visual Insights</h3>
             <p className="text-sm text-text-muted">Beautiful charts and trends to understand your spending.</p>
@@ -68,7 +68,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
 
         {/* Trust indicators */}
-        <div className="pt-12 flex items-center justify-center gap-6 text-text-muted text-sm">
+        <div className="pt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-text-muted text-sm">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
             <span>Local Storage</span>
