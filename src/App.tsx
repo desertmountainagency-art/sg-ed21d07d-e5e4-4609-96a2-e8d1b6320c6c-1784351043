@@ -25,6 +25,7 @@ import PaymentSuccess from './components/PaymentSuccess';
 export default function App() {
   // Page Navigation State
   const [currentPage, setCurrentPage] = useState<string>('pageDashboard');
+  const [showLanding, setShowLanding] = useState<boolean>(true);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [isProUser, setIsProUser] = useState(false);
   const [showSuccessPage, setShowSuccessPage] = useState(false);
@@ -378,19 +379,20 @@ export default function App() {
       <PaymentSuccess 
         onContinue={() => {
           setShowSuccessPage(false);
-          // After payment, go to onboarding if not completed, otherwise dashboard
-          if (!onboardingComplete) {
-            // Will fall through to onboarding check below
-          }
+          setShowLanding(false);
+          // After payment, will fall through to onboarding if not completed
         }}
       />
     );
   }
 
-  // Step 2: Landing Page → Onboarding → Dashboard
-  // First-time users see: Landing → Onboarding
-  // Returning users skip directly to: Dashboard
+  // Step 2: First-time flow: Landing → Onboarding → Dashboard
   if (!onboardingComplete) {
+    // Show Landing Page first
+    if (showLanding) {
+      return <LandingPage onGetStarted={() => setShowLanding(false)} />;
+    }
+    // After clicking "Get Started Free", show Onboarding
     return <Onboarding onComplete={handleOnboardingComplete} />;
   }
 
