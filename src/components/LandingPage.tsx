@@ -129,24 +129,37 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           All your data stays <span className="text-success font-semibold">100% local</span> on your device.
         </p>
 
-        {/* Feature highlights */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6">
-          <div className="bg-bg-surface border border-border-custom rounded-2xl p-4 sm:p-6 backdrop-blur-md">
-            <div className="text-3xl mb-3">🔒</div>
-            <h3 className="font-semibold text-text-primary mb-2">Privacy First</h3>
-            <p className="text-sm text-text-muted">No cloud sync. No tracking. Your data never leaves your device.</p>
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="bg-bg-surface border-2 border-border-custom rounded-2xl p-6 sm:p-8 hover:border-accent transition-all shadow-lg hover:shadow-xl">
+            <div className="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+              <svg className="w-9 h-9 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-text-primary mb-3">Smart Receipt Scanning</h3>
+            <p className="text-text-secondary leading-relaxed text-base">Snap a photo and let AI extract all the details instantly. No manual entry needed.</p>
           </div>
-          
-          <div className="bg-bg-surface border border-border-custom rounded-2xl p-4 sm:p-6 backdrop-blur-md">
-            <div className="text-3xl mb-3">📸</div>
-            <h3 className="font-semibold text-text-primary mb-2">Smart Receipts</h3>
-            <p className="text-sm text-text-muted">Snap photos of receipts and auto-extract transaction details.</p>
+
+          <div className="bg-bg-surface border-2 border-border-custom rounded-2xl p-6 sm:p-8 hover:border-accent transition-all shadow-lg hover:shadow-xl">
+            <div className="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+              <svg className="w-9 h-9 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-text-primary mb-3">Beautiful Analytics</h3>
+            <p className="text-text-secondary leading-relaxed text-base">Visualize your spending with gorgeous charts and insights that actually make sense.</p>
           </div>
-          
-          <div className="bg-bg-surface border border-border-custom rounded-2xl p-4 sm:p-6 backdrop-blur-md">
-            <div className="text-3xl mb-3">📊</div>
-            <h3 className="font-semibold text-text-primary mb-2">Visual Insights</h3>
-            <p className="text-sm text-text-muted">Beautiful charts and trends to understand your spending.</p>
+
+          <div className="bg-bg-surface border-2 border-border-custom rounded-2xl p-6 sm:p-8 hover:border-accent transition-all shadow-lg hover:shadow-xl">
+            <div className="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+              <svg className="w-9 h-9 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-text-primary mb-3">Privacy First</h3>
+            <p className="text-text-secondary leading-relaxed text-base">Your data stays on your device. No cloud sync, no tracking, complete privacy.</p>
           </div>
         </div>
 
@@ -254,7 +267,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                 <button
                   type="button"
                   onClick={() => toggleFaq(index)}
-                  className="w-full text-left p-5 flex items-center justify-between gap-4 hover:bg-bg-surface/50 transition-colors"
+                  className="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-4 hover:bg-bg-surface/50 transition-colors"
                 >
                   <span className="font-semibold text-text-primary text-sm sm:text-base">
                     {faq.question}
@@ -281,7 +294,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                     openFaq === index ? "max-h-96" : "max-h-0"
                   }`}
                 >
-                  <div className="px-5 pb-5 text-sm text-text-secondary leading-relaxed">
+                  <div className="px-4 sm:px-5 pb-4 sm:pb-5 text-sm text-text-secondary leading-relaxed">
                     {faq.answer}
                   </div>
                 </div>
@@ -295,7 +308,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           <button
             type="button"
             onClick={onGetStarted}
-            className="bg-accent hover:bg-accent/90 text-white font-bold text-lg px-10 py-4 rounded-full shadow-[0_8px_30px_rgba(99,102,241,0.4)] hover:shadow-[0_8px_40px_rgba(99,102,241,0.5)] transition-all duration-300 cursor-pointer active:scale-95"
+            className="bg-accent hover:bg-accent/90 text-white font-bold text-base sm:text-lg px-8 py-3 sm:px-10 sm:py-4 rounded-full shadow-[0_8px_30px_rgba(99,102,241,0.4)] hover:shadow-[0_8px_40px_rgba(99,102,241,0.5)] transition-all duration-300 cursor-pointer active:scale-95"
           >
             Get Started Free
           </button>
@@ -324,7 +337,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
       {/* Comprehensive Footer */}
       <footer className="relative z-10 w-full max-w-6xl mx-auto px-6 py-12 mt-24 border-t border-border-custom">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 mb-12">
           
           {/* Brand column */}
           <div className="lg:col-span-2">
