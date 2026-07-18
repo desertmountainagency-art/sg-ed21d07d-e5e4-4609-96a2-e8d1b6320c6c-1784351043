@@ -14,14 +14,14 @@
   
   --color-text-primary: #111827;
   --color-text-secondary: #374151;
-  --color-text-muted: #6b7280;
+  --color-text-muted: #52525b;
   
   --color-accent: #6366f1;
   --color-accent-dim: rgba(99, 102, 241, 0.15);
   --color-accent-glow: rgba(99, 102, 241, 0.30);
   
-  --color-success: #10b981;
-  --color-success-dim: rgba(16, 185, 129, 0.12);
+  --color-success: #059669;
+  --color-success-dim: rgba(5, 150, 105, 0.12);
   --color-warning: #f59e0b;
   --color-warning-dim: rgba(245, 158, 11, 0.12);
   --color-danger: #ef4444;
