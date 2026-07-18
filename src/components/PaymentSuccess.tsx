@@ -92,8 +92,8 @@ export default function PaymentSuccess({ onContinue }: PaymentSuccessProps) {
 
           {/* Thank you message */}
           <div className="bg-accent/10 border border-accent/30 rounded-xl p-4 mb-8">
-            <p className="text-sm text-text-secondary">
-              Thank you for supporting <span className="font-semibold text-accent">Ownit.Money</span>! Your purchase helps us keep building privacy-focused financial tools.
+            <p className="text-sm text-text-muted leading-relaxed max-w-md">
+              Thank you for supporting <span className="font-semibold text-success">Ownit</span><span className="font-semibold text-accent">.</span><span className="font-semibold">Money</span>! Your purchase helps us keep building privacy-focused financial tools.
             </p>
           </div>
 

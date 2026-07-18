@@ -413,8 +413,10 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           {/* Brand column */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="text-3xl">💰</div>
-              <span className="text-xl font-bold text-text-primary">Ownit.Money</span>
+              <span className="text-2xl">💰</span>
+              <span className="text-xl font-bold text-text-primary">
+                <span className="text-success">Ownit</span>.Money
+              </span>
             </div>
             <p className="text-sm text-text-muted mb-6 max-w-xs">
               Privacy-first personal finance app. Track expenses, scan receipts, and gain insights—all stored locally on your device.

@@ -40,8 +40,8 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
       {step === 0 && (
         <div className="max-w-[400px] w-full text-center space-y-6 animate-fade-in">
           <span className="text-6xl block">🔒</span>
-          <h1 className="text-3xl font-bold mb-2 text-center">
-            <span className="text-white">Welcome to</span> <span className="text-accent">Ownit.Money</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight mb-6">
+            <span className="text-white">Welcome to</span> <span className="text-success">Ownit</span><span className="text-accent">.</span><span className="text-white">Money</span>
           </h1>
           <p className="text-text-secondary text-sm md:text-base leading-relaxed">
             Your money is your business. Track it like it.

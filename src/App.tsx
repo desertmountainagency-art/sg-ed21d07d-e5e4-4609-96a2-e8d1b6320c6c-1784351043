@@ -403,7 +403,10 @@ export default function App() {
       {/* Dynamic Header */}
       <header className="shrink-0 h-[60px] flex items-center justify-between px-[18px] bg-bg-primary border-b border-border-custom z-10 relative">
         <div className="flex items-center gap-2 font-bold text-lg tracking-tight text-text-primary select-none">
-          <span>Ownit<span className="text-accent">.</span>Money</span>
+          <span className="flex items-center gap-2 text-xl font-bold tracking-tight cursor-pointer" onClick={() => setCurrentPage('pageDashboard')}>
+            <span className="text-2xl">💰</span>
+            <span className="text-success">Ownit</span><span className="text-accent">.</span>Money
+          </span>
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
         </div>
         
