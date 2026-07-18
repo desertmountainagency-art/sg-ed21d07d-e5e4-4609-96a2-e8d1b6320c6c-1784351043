@@ -361,10 +361,7 @@ export default function App() {
     setIsProUser(true);
     localStorage.setItem('isPro', 'true');
     setShowUpgradeModal(false);
-    setToast({
-      message: "🎉 Upgraded to Pro! All features unlocked.",
-      type: "success"
-    });
+    showToast("🎉 Upgraded to Pro! All features unlocked.");
   };
 
   if (isLoading) {
@@ -389,7 +386,6 @@ export default function App() {
       <PaymentSuccess 
         onContinue={() => {
           setShowSuccessPage(false);
-          setShowOnboarding(true);
         }}
       />
     );
@@ -400,7 +396,6 @@ export default function App() {
       <LandingPage 
         onGetStarted={() => {
           setShowLandingPage(false);
-          setShowOnboarding(true);
         }}
       />
     );
