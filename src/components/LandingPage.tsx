@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 
 interface LandingPageProps {
   onGetStarted: () => void;
@@ -15,7 +15,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (email && email.includes("@")) {
       setSubscribed(true);
