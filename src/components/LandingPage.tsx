@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface LandingPageProps {
   onGetStarted: () => void;
@@ -6,10 +6,65 @@ interface LandingPageProps {
 
 export default function LandingPage({ onGetStarted }: LandingPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
+
+  const testimonials = [
+    {
+      quote: "Finally, a budget app that respects my privacy. No cloud sync means my financial data stays mine. The receipt scanner is surprisingly accurate!",
+      name: "Sarah M.",
+      role: "Privacy Advocate",
+      avatar: "👤",
+      color: "accent"
+    },
+    {
+      quote: "I've tried dozens of finance apps. This is the only one I trust. Everything stays on my device, and the insights are actually useful.",
+      name: "James K.",
+      role: "Software Engineer",
+      avatar: "👤",
+      color: "success"
+    },
+    {
+      quote: "Simple, clean, and private. No subscriptions, no tracking, no BS. Just what I need to track my expenses without selling my data.",
+      name: "Maya L.",
+      role: "Freelance Designer",
+      avatar: "👤",
+      color: "accent"
+    },
+    {
+      quote: "The charts help me see exactly where my money goes. No more wondering why I'm always broke at month-end. Love the local-first approach!",
+      name: "Alex R.",
+      role: "Small Business Owner",
+      avatar: "👤",
+      color: "success"
+    }
+  ];
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const goToTestimonial = (index: number) => {
+    setCurrentTestimonial(index);
+  };
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const interval = setInterval(() => {
+      nextTestimonial();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, currentTestimonial]);
 
   const faqs = [
     {
@@ -101,81 +156,82 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
             Trusted by Privacy-Conscious Users
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            {/* Testimonial 1 */}
-            <div className="bg-bg-surface border border-border-custom rounded-xl p-5 sm:p-6 backdrop-blur-md text-left">
-              <div className="flex items-start gap-3 mb-3">
-                <div className="text-2xl">⭐⭐⭐⭐⭐</div>
-              </div>
-              <p className="text-sm text-text-secondary italic mb-4">
-                "Finally, a budget app that respects my privacy. No cloud sync means my financial data stays mine. The receipt scanner is surprisingly accurate!"
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-lg">
-                  👤
-                </div>
-                <div>
-                  <p className="font-semibold text-text-primary text-sm">Sarah M.</p>
-                  <p className="text-xs text-text-muted">Privacy Advocate</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 2 */}
-            <div className="bg-bg-surface border border-border-custom rounded-xl p-5 sm:p-6 backdrop-blur-md text-left">
-              <div className="flex items-start gap-3 mb-3">
-                <div className="text-2xl">⭐⭐⭐⭐⭐</div>
-              </div>
-              <p className="text-sm text-text-secondary italic mb-4">
-                "I've tried dozens of finance apps. This is the only one I trust. Everything stays on my device, and the insights are actually useful."
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center text-lg">
-                  👤
-                </div>
-                <div>
-                  <p className="font-semibold text-text-primary text-sm">James K.</p>
-                  <p className="text-xs text-text-muted">Software Engineer</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 3 */}
-            <div className="bg-bg-surface border border-border-custom rounded-xl p-5 sm:p-6 backdrop-blur-md text-left">
-              <div className="flex items-start gap-3 mb-3">
-                <div className="text-2xl">⭐⭐⭐⭐⭐</div>
-              </div>
-              <p className="text-sm text-text-secondary italic mb-4">
-                "Simple, clean, and private. No subscriptions, no tracking, no BS. Just what I need to track my expenses without selling my data."
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-lg">
-                  👤
-                </div>
-                <div>
-                  <p className="font-semibold text-text-primary text-sm">Maya L.</p>
-                  <p className="text-xs text-text-muted">Freelance Designer</p>
-                </div>
+          {/* Testimonial Carousel */}
+          <div 
+            className="relative max-w-3xl mx-auto"
+            onMouseEnter={() => setIsAutoPlaying(false)}
+            onMouseLeave={() => setIsAutoPlaying(true)}
+          >
+            {/* Carousel container */}
+            <div className="overflow-hidden">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
+              >
+                {testimonials.map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="w-full flex-shrink-0 px-2"
+                  >
+                    <div className="bg-bg-surface border border-border-custom rounded-xl p-6 sm:p-8 backdrop-blur-md text-center">
+                      <div className="flex items-center justify-center gap-1 mb-4">
+                        <div className="text-2xl">⭐⭐⭐⭐⭐</div>
+                      </div>
+                      <p className="text-base sm:text-lg text-text-secondary italic mb-6 leading-relaxed">
+                        "{testimonial.quote}"
+                      </p>
+                      <div className="flex items-center justify-center gap-3">
+                        <div className={`w-12 h-12 rounded-full bg-${testimonial.color}/20 flex items-center justify-center text-xl`}>
+                          {testimonial.avatar}
+                        </div>
+                        <div className="text-left">
+                          <p className="font-semibold text-text-primary">{testimonial.name}</p>
+                          <p className="text-sm text-text-muted">{testimonial.role}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Testimonial 4 */}
-            <div className="bg-bg-surface border border-border-custom rounded-xl p-5 sm:p-6 backdrop-blur-md text-left">
-              <div className="flex items-start gap-3 mb-3">
-                <div className="text-2xl">⭐⭐⭐⭐⭐</div>
-              </div>
-              <p className="text-sm text-text-secondary italic mb-4">
-                "The charts help me see exactly where my money goes. No more wondering why I'm always broke at month-end. Love the local-first approach!"
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center text-lg">
-                  👤
-                </div>
-                <div>
-                  <p className="font-semibold text-text-primary text-sm">Alex R.</p>
-                  <p className="text-xs text-text-muted">Small Business Owner</p>
-                </div>
-              </div>
+            {/* Navigation arrows */}
+            <button
+              type="button"
+              onClick={prevTestimonial}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-12 bg-bg-surface border border-border-custom rounded-full p-2 sm:p-3 hover:bg-accent hover:border-accent transition-all shadow-lg"
+              aria-label="Previous testimonial"
+            >
+              <svg className="w-5 h-5 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={nextTestimonial}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-12 bg-bg-surface border border-border-custom rounded-full p-2 sm:p-3 hover:bg-accent hover:border-accent transition-all shadow-lg"
+              aria-label="Next testimonial"
+            >
+              <svg className="w-5 h-5 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Dot indicators */}
+            <div className="flex items-center justify-center gap-2 mt-6">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => goToTestimonial(index)}
+                  className={`transition-all ${
+                    currentTestimonial === index
+                      ? "w-8 h-2 bg-accent rounded-full"
+                      : "w-2 h-2 bg-text-muted/30 rounded-full hover:bg-text-muted/50"
+                  }`}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
