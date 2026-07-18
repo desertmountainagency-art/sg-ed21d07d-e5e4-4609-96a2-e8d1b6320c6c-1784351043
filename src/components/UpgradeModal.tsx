@@ -6,7 +6,7 @@ interface UpgradeModalProps {
   onUpgrade: () => void;
 }
 
-export default function UpgradeModal({ isOpen, onClose, onUpgrade }: UpgradeModalProps) {
+export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
   // Support Escape key to close the modal
   useEffect(() => {
     if (!isOpen) return;
@@ -18,6 +18,18 @@ export default function UpgradeModal({ isOpen, onClose, onUpgrade }: UpgradeModa
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
+
+  const handleUpgradeClick = () => {
+    const stripePaymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK;
+    
+    if (!stripePaymentLink || stripePaymentLink === "https://buy.stripe.com/your-payment-link-here") {
+      alert('⚠️ Stripe payment link not configured. Please add VITE_STRIPE_PAYMENT_LINK to your .env.local file.');
+      return;
+    }
+    
+    // Redirect to Stripe checkout
+    window.location.href = stripePaymentLink;
+  };
 
   if (!isOpen) return null;
 
@@ -71,7 +83,7 @@ export default function UpgradeModal({ isOpen, onClose, onUpgrade }: UpgradeModa
           <button 
             type="button" 
             className="flex-1 py-2.5 rounded-lg bg-accent text-white text-sm font-semibold hover:opacity-90 active:scale-[0.97] transition"
-            onClick={onUpgrade}
+            onClick={handleUpgradeClick}
           >
             Upgrade Now
           </button>
