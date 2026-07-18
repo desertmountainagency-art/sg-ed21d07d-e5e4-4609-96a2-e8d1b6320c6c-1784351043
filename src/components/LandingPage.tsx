@@ -110,13 +110,17 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-success opacity-8 rounded-full blur-[120px]" />
       </div>
 
+      {/* Logo in top-left */}
+      <div className="absolute top-6 left-6 z-20 flex items-center gap-2">
+        <span className="text-3xl">💰</span>
+        <span className="text-xl font-bold tracking-tight">
+          <span className="text-success">Ownit</span>
+          <span className="text-text-primary">.Money</span>
+        </span>
+      </div>
+
       {/* Content container */}
       <div className="relative z-10 max-w-2xl mx-auto text-center space-y-8">
-        
-        {/* Logo and brand */}
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <div className="text-5xl">💰</div>
-        </div>
         
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-text-primary leading-tight">
           Own Your Money.<br/>
