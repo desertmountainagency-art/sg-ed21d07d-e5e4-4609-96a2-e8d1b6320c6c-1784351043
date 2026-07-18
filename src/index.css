@@ -11,9 +11,9 @@
   --color-bg-surface-3: rgba(63, 63, 70, 0.3);
   --color-bg-elevated: #18181b;
   
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #a1a1aa;
-  --color-text-muted: #71717a;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #ffffff;
+  --color-text-muted: #d4d4d8;
   
   --color-accent: #6366f1;
   --color-accent-dim: rgba(99, 102, 241, 0.15);
