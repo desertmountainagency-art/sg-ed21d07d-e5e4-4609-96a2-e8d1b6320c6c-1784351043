@@ -29,6 +29,12 @@ export default function App() {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [isProUser, setIsProUser] = useState(false);
   const [showSuccessPage, setShowSuccessPage] = useState(false);
+  
+  // Theme State
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('theme');
+    return (saved === 'light' || saved === 'dark') ? saved : 'light';
+  });
 
   // Core Application Data State
   const [onboardingComplete, setOnboardingComplete] = useState<boolean>(false);
@@ -43,6 +49,17 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string>('');
   const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  // Theme management effect
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   // Load state from IndexedDB on startup
   useEffect(() => {
@@ -363,6 +380,11 @@ export default function App() {
     showToast("🎉 Upgraded to Pro! All features unlocked.");
   };
 
+  // Toggle theme between light and dark
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
   // RENDER LOGIC - Clear navigation flow
   if (isLoading) {
     return (
@@ -414,6 +436,21 @@ export default function App() {
           <span className="text-xs font-semibold text-text-secondary bg-bg-surface-2 px-2.5 py-1 rounded-full border border-border-custom select-none">
             {baseCurrency}
           </span>
+          
+          {/* Theme Toggle Button */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-bg-surface-2 border border-border-custom hover:border-accent transition cursor-pointer select-none"
+            title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          >
+            {theme === 'light' ? (
+              <span className="text-base">🌙</span>
+            ) : (
+              <span className="text-base">☀️</span>
+            )}
+          </button>
+          
           <button
             type="button"
             className={`text-[10px] font-bold text-uppercase tracking-wider px-2.5 py-1 rounded-full border transition cursor-pointer select-none ${
