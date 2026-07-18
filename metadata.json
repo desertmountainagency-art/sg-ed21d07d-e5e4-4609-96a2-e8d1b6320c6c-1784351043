@@ -1,0 +1,6 @@
+{
+  "name": "Ownit.Money",
+  "description": "Privacy-first expense tracking application where all data remains 100% local on your device.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
