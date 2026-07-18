@@ -199,7 +199,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
             <button
               type="button"
               onClick={prevTestimonial}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-12 bg-bg-surface border border-border-custom rounded-full p-2 sm:p-3 hover:bg-accent hover:border-accent transition-all shadow-lg"
+              className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-12 bg-bg-surface border border-border-custom rounded-full p-2 sm:p-3 hover:bg-accent hover:border-accent transition-all shadow-lg items-center justify-center"
               aria-label="Previous testimonial"
             >
               <svg className="w-5 h-5 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -209,7 +209,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
             <button
               type="button"
               onClick={nextTestimonial}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-12 bg-bg-surface border border-border-custom rounded-full p-2 sm:p-3 hover:bg-accent hover:border-accent transition-all shadow-lg"
+              className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-12 bg-bg-surface border border-border-custom rounded-full p-2 sm:p-3 hover:bg-accent hover:border-accent transition-all shadow-lg items-center justify-center"
               aria-label="Next testimonial"
             >
               <svg className="w-5 h-5 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
