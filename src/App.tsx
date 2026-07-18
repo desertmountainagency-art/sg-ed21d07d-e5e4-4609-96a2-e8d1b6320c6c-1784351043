@@ -19,10 +19,12 @@ import ScanReceipt from './components/ScanReceipt';
 import SettingsPage from './components/SettingsPage';
 import UpgradeModal from './components/UpgradeModal';
 import Toast from './components/Toast';
+import LandingPage from './components/LandingPage';
 
 export default function App() {
   // Page Navigation State
   const [currentPage, setCurrentPage] = useState<string>('pageDashboard');
+  const [showLanding, setShowLanding] = useState<boolean>(true);
 
   // Core Application Data State
   const [onboardingComplete, setOnboardingComplete] = useState<boolean>(false);
@@ -353,6 +355,10 @@ export default function App() {
         <span className="text-xs font-medium tracking-wide">Loading Ownit.Money...</span>
       </div>
     );
+  }
+
+  if (showLanding && !onboardingComplete) {
+    return <LandingPage onGetStarted={() => setShowLanding(false)} />;
   }
 
   if (!onboardingComplete) {
