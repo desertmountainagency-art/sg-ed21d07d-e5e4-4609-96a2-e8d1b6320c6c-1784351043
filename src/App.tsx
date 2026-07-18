@@ -28,7 +28,6 @@ export default function App() {
   const [showLanding, setShowLanding] = useState<boolean>(true);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [isProUser, setIsProUser] = useState(false);
-  const [showLandingPage, setShowLandingPage] = useState(true);
   const [showSuccessPage, setShowSuccessPage] = useState(false);
 
   // Core Application Data State
@@ -52,7 +51,7 @@ export default function App() {
     if (urlParams.get('success') === 'true' || urlParams.get('payment') === 'success') {
       setShowSuccessPage(true);
       setIsProUser(true);
-      setShowLandingPage(false);
+      setShowLanding(false);
       
       // Store pro status
       localStorage.setItem('isPro', 'true');
@@ -373,34 +372,29 @@ export default function App() {
     );
   }
 
-  if (showLanding && !onboardingComplete) {
-    return <LandingPage onGetStarted={() => setShowLanding(false)} />;
-  }
-
-  if (!onboardingComplete) {
-    return <Onboarding onComplete={handleOnboardingComplete} />;
-  }
-
+  // Payment success page (shows after Stripe checkout)
   if (showSuccessPage) {
     return (
       <PaymentSuccess 
         onContinue={() => {
           setShowSuccessPage(false);
+          setShowLanding(false); // Skip landing after payment
         }}
       />
     );
   }
 
-  if (showLandingPage) {
-    return (
-      <LandingPage 
-        onGetStarted={() => {
-          setShowLandingPage(false);
-        }}
-      />
-    );
+  // Landing page (first visit, before onboarding)
+  if (showLanding && !onboardingComplete) {
+    return <LandingPage onGetStarted={() => setShowLanding(false)} />;
   }
 
+  // Onboarding (after clicking Get Started from landing)
+  if (!onboardingComplete) {
+    return <Onboarding onComplete={handleOnboardingComplete} />;
+  }
+
+  // Main app (after onboarding complete)
   return (
     <div className="flex flex-col h-screen max-w-[480px] mx-auto bg-bg-primary relative overflow-hidden md:border-x md:border-border-custom md:shadow-2xl">
       
