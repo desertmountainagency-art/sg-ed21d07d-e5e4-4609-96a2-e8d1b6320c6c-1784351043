@@ -52,9 +52,9 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
         </p>
         
         {/* Pricing display */}
-        <div className="bg-accent/10 border-2 border-accent/40 rounded-2xl p-8 mb-6 text-center shadow-lg">
-          <div className="text-5xl font-bold text-text-primary mb-2">$39.95</div>
-          <div className="text-base text-text-muted font-medium">One-time payment • Lifetime access</div>
+        <div className="bg-accent/10 border border-accent/30 rounded-xl p-4 mb-5 text-center">
+          <div className="text-3xl font-bold text-text-primary mb-1">$39.95</div>
+          <div className="text-sm text-text-muted">One-time payment • Lifetime access</div>
         </div>
         
         <ul className="space-y-3 mb-6">
