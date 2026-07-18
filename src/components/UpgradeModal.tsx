@@ -36,6 +36,12 @@ export default function UpgradeModal({ isOpen, onClose, onUpgrade }: UpgradeModa
           Get unlimited visibility and take full control of your financial history.
         </p>
         
+        {/* Pricing display */}
+        <div className="bg-accent/10 border border-accent/30 rounded-xl p-4 mb-5 text-center">
+          <div className="text-3xl font-bold text-text-primary mb-1">$39.95</div>
+          <div className="text-sm text-text-muted">One-time payment • Lifetime access</div>
+        </div>
+        
         <ul className="space-y-3 mb-6">
           <li className="flex items-center gap-3 text-sm text-text-secondary border-b border-border-custom pb-2">
             <span className="text-success font-bold">✓</span> Unlimited transaction history
